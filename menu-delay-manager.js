@@ -37,7 +37,7 @@
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
 
-    this.delay = opts.delay || 500;
+    this.delay = isNumber(opts.delay) ? opts.delay : 500;
     this.activeClass = opts.activeClass || 'open';
     this.setHoverItems(opts.$hoverItems || $());
 
@@ -173,6 +173,10 @@
   Coordinate.prototype.isValid = function () {
     return !!(this.x && this.y);
   };
+
+  function isNumber (num) {
+    return Object.prototype.toString.call(num) === '[object Number]';
+  }
 
   return exports = MenuDelayManager;
 
