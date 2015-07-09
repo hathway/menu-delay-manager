@@ -1,4 +1,18 @@
-(function ($) {
+(function(factory) {
+  var root = window;
+
+  // common.js
+  if (typeof exports !== 'undefined') {
+    var $;
+    try { $ = require('jquery'); } catch(e) {}
+    factory(exports, $);
+
+  // browser global.
+  } else {
+    root.MenuDelayManager = factory({}, root.jQuery || root.Zepto || root.ender || root.$);
+  }
+
+}(function(exports, $) {
   /**
    * Responsible to apply a class to a list of elements on hover.
    * waits for a timeout and provides grace for motion in one direction.
@@ -159,4 +173,7 @@
   Coordinate.prototype.isValid = function () {
     return !!(this.x && this.y);
   };
-})(jQuery);
+
+  return exports = MenuDelayManager;
+
+}));
